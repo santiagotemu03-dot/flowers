@@ -410,7 +410,14 @@
     }
   }
 
-  audio.play().catch(() => {});
+  function startAudio(){
+    audio.play().catch(() => {});
+  }
+
+  // Los moviles bloquean el autoplay con sonido hasta la primera interaccion.
+  window.addEventListener('pointerdown', startAudio, { once: true, passive: true });
+  window.addEventListener('keydown', startAudio, { once: true });
+  startAudio();
 
   const stage = document.getElementById('stage');
 
